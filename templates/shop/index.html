@@ -1,0 +1,43 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block site_title %}
+
+{% endblock %}
+
+{% block site_content %}
+    <div class="d-flex flex-column">
+        <div class="p-2"><img
+                src="{% static '/images/index.jpeg' %}"
+                class="img-fluid">
+        </div>
+
+        <div class="p-2"><a class="btn btn-dark" href="{% url 'list items' %}" role="button"><h3>Shop now</h3></a></div>
+
+        <div class="p-2">
+            <div class="d-flex justify-content-center">
+                <div class="p-2">
+                    <img src="{% static 'images/earrings_home.jpg' %}"
+                         class="img-thumbnail">
+
+                    <a class="btn btn-outline-dark" href="{% url 'list earrings' %}" role="button">Earrings</a>
+                </div>
+
+                <div class="p-2">
+                    <img src="{% static 'images/rings_home.jpg' %}"
+                         class="img-thumbnail">
+
+                    <a class="btn btn-outline-dark" href="{% url 'list rings' %}" role="button">Rings</a>
+                </div>
+
+                <div class="p-2">
+                    <img src="{% static 'images/necklaces_home.jpg' %}"
+                         class="img-thumbnail">
+                    <a class="btn btn-outline-dark" href="{% url 'list necklaces' %}" role="button">Necklaces</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
