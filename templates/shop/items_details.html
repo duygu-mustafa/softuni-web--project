@@ -4,18 +4,18 @@
     {{ item.name }}
 {% endblock %}
 {% block site_content %}
-    <div class="d-flex">
-        <div class="d-inline p-2 w-50">
+    <div class="d-flex item-box">
+        <div class="d-inline p-2 w-50 ">
             <img src="{{ item.image.url }}" class="w-50 rounded mx-auto d-block">
         </div>
         <div class="d-inline p-2 w-50">
             <div class="d-flex flex-column">
-                <h5><u>Name:</u> {{ item.name }}</h5>
-                <h5><u>Type:</u> {{ item.type }}</h5>
-                <h5><u>Price:</u> {{ item.price }}$</h5>
+                <h5 class="text-left">Name: {{ item.name }}</h5>
+                <h5 class="text-left">Type: {{ item.get_type_display }}</h5>
+                <h5 class="text-left">Price: {{ item.price }}$</h5>
             </div>
-            <p class="mt-2">Description: {{ item.description }}</p>
-            <div>
+            <p class="mt-2 text-left">Description: {{ item.description }}</p>
+            <div class="text-left">
                 {% if item.is_available %}
                     <a href="#" class="btn btn-primary">Order</a>
                 {% else %}

@@ -18,8 +18,17 @@
             </li>
 
         </ul>
-        <span class="navbar-text">
-            <a class="nav-item" href="#">User</a>
-        </span>
+        {% if user.is_authenticated %}
+            <span class="navbar-text">
+                <a class="nav-item" href="{% url 'user profile' %}">{{user.first_name}}</a>
+                <a class="nav-item" href="{% url 'signout user' %}">Sign Out</a>
+            </span>
+        {% else %}
+            <span class="navbar-text">
+                <a class="nav-item" href="{% url 'login' %}">Sign In</a>
+                <a class="nav-item" href="{% url 'signup user' %}">Sign Up</a>
+            </span>
+        {% endif %}
+
     </div>
 </nav>

@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+
+{% block site_title %}
+    Edit Profile
+{% endblock %}
+
+{% block site_content %}
+    <h1>Enter your new data</h1>
+    <div class="form">
+        <form method="POST" action="{% url 'edit profile' %}">
+            {{ form }}
+            {% csrf_token %}
+
+            <button class="btn btn-success item-box">Edit</button>
+        </form>
+    </div>
+{% endblock %}

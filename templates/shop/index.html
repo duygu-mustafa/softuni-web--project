@@ -2,11 +2,15 @@
 {% load static %}
 
 {% block site_title %}
+    Home
+{% endblock %}
+
+{% block site_styles %}
 
 {% endblock %}
 
 {% block site_content %}
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column item-box">
         <div class="p-2"><img
                 src="{% static '/images/index.jpeg' %}"
                 class="img-fluid">
