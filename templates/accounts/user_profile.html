@@ -1,38 +1,19 @@
-{% extends 'shared/base.html' %}
-{% load static %}
-
-{% block site_title %}
-    Profile
+{% extends 'accounts/user_base.html' %}
+{% block user_title %}
+    Account details
 {% endblock %}
 
-
-{% block site_content %}
-    <div>
-        <h1>The Account of Username</h1>
+{% block user_content %}
+    <div class="d-flex flex-column">
+        <h5 class="text-left">First name: {{ user.first_name }}</h5>
+        <h5 class="text-left">Last name: {{ user.last_name }}</h5>
+        <h5 class="text-left">Email: {{ user.email }}</h5>
+        <h5 class="text-left">Phone: {{ user.profile.phone }}</h5>
     </div>
-    <div class="d-flex">
+    <div>
 
-        <div class="d-inline p-2 w-50">
-            <img src="{% static 'images/user_picture.png' %}" class="w-50 rounded mx-auto d-block">
-            <div class="d-flex flex-column">
-                <h5><a href="{% url 'user profile' %}">My account</a></h5>
-                <h5><a href="#">My addresses</a></h5>
-                <h5><a href="#">My orders</a></h5>
-            </div>
-        </div>
+        <a href="{% url 'edit profile' %}" class="btn btn-success">Edit</a>
+        <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>
 
-        <div class="d-inline p-2 w-50">
-            <div class="d-flex flex-column">
-                <h5>First name: {{user.first_name}}</h5>
-                <h5>Last name: {{user.last_name}}</h5>
-                <h5>Email: {{user.email}}</h5>
-                <h5>Phone: {{user.profile.phone}}</h5>
-            </div>
-            <div>
-
-                <a href="{% url 'edit profile' %}" class="btn btn-success">Edit</a>
-                <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>
-
-            </div>
-        </div>
+    </div>
 {% endblock %}

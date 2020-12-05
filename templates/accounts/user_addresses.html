@@ -1,0 +1,32 @@
+{% extends 'accounts/user_base.html' %}
+
+{% block user_title %}
+    My addresses
+{% endblock %}
+
+{% block user_content %}
+
+    {% for address in addresses %}
+        <div class="p-2 bd-highlight" style="border-width: 1px;border-style: solid; margin: 10px;">
+            {% if address.is_default %}
+                <h5 class="text-left">Default</h5>
+            {% endif %}
+            <h5 class="text-left">Street: {{ address.street }}</h5>
+            <h5 class="text-left">City: {{ address.city }}</h5>
+            <h5 class="text-left">Country: {{ address.country }}</h5>
+            <h5 class="text-left">Zip: {{ address.zip_code }}</h5>
+
+            <div>
+                <a href="{% url 'edit address' address.id %}" class="btn btn-success">Edit</a>
+                <a href="{% url 'delete address' address.id %}" class="btn btn-danger">Delete</a>
+
+            </div>
+        </div>
+    {% endfor %}
+    <div class="p-2 bd-highlight">
+        <div>
+            <a href="{% url 'create address' %}" class="btn btn-outline-success">Create</a>
+        </div>
+    </div>
+
+{% endblock %}

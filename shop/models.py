@@ -1,5 +1,8 @@
 from django.db import models
 
+from accounts.models import Profile
+
+
 class Item(models.Model):
     EARRINGS = 'ER'
     RING = 'RI'
@@ -22,3 +25,9 @@ class Item(models.Model):
 
     def __str__(self):
         return f'{self.type}: {self.name}'
+
+
+class Favorite(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    test = models.CharField(max_length=2)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)

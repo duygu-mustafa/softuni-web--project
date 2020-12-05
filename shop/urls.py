@@ -1,5 +1,6 @@
 from django.urls import path
-from shop.views import index, about, list_items, item_details, list_earrings, list_rings, list_necklaces
+from shop.views import index, about, list_items, item_details, list_earrings, list_rings, list_necklaces, \
+    add_item_to_favorites
 
 urlpatterns = [
     path('', index, name='index'),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('necklaces/', list_necklaces, name='list necklaces'),
 
     path('product/<int:pk>', item_details, name='item details'),
+    path('fav/<int:pk>', add_item_to_favorites, name='add to fav')
 ]

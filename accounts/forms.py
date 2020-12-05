@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 # from accounts.models import UserProfile
-from accounts.models import Profile
+from accounts.models import Profile, Address
 
 
 class RegisterForm(UserCreationForm):
@@ -52,4 +52,15 @@ class ProfileForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name')
 
+
+class AddressForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for (_, field) in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Address
+        exclude = ('profile',)
 

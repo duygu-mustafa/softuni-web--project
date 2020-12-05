@@ -2,9 +2,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-
-from accounts.forms import RegisterForm, ProfileForm
-from accounts.models import Profile
+from accounts.forms import RegisterForm, ProfileForm, AddressForm
+from accounts.models import Profile, Address
+from shop.models import Item
 
 
 @login_required
@@ -79,3 +79,86 @@ def delete_profile(request):
     else:
         user.delete()
         return redirect('index')
+
+
+@login_required
+def user_addresses(request):
+    user = request.user
+    addresses = user.profile.address_set.all
+    context = {
+        'addresses': user.profile.address_set.all,
+    }
+    return render(request, 'accounts/user_addresses.html', context)
+
+
+@login_required
+def create_address(request):
+    if request.method == 'GET':
+        form = AddressForm()
+        context = {
+            'form': form,
+        }
+        return render(request, 'accounts/create_address.html', context)
+    else:
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.profile_id = request.user.profile.id
+            address.save()
+            return redirect('user addresses')
+        context = {
+            'form': form,
+        }
+        return render(request, 'accounts/create_address.html', context)
+
+
+@login_required
+def edit_address(request, pk):
+    address = Address.objects.get(pk=pk)
+    if request.method == 'GET':
+        form = AddressForm(instance=address)
+        context = {
+            'form': form,
+            'address': address,
+        }
+        return render(request, 'accounts/edit_address.html', context)
+    else:
+        form = AddressForm(request.POST, instance=address)
+        if form.is_valid():
+            address = form.save()
+            address.profile = request.user.profile.id
+            address.save()
+            return redirect('user addresses')
+        context = {
+            'form': form,
+            'address': address,
+        }
+        return render(request, 'accounts/edit_address.html', context)
+
+
+@login_required
+def delete_address(request, pk):
+    address = Address.objects.get(pk=pk)
+    form = AddressForm(instance=address)
+
+    for _, field in form.fields.items():
+        field.widget.attrs['disabled'] = True
+
+    if request.method == 'GET':
+        context = {
+            'form': form,
+            'address': address,
+        }
+        return render(request, 'accounts/delete_address.html', context)
+    else:
+        address.delete()
+        return redirect('user addresses')
+
+
+def user_favorites(request):
+    favorites = request.user.profile.favorite_set.filter(user_id=request.user.profile.id)
+    items = [Item.objects.get(pk=f.item_id) for f in favorites]
+    context = {
+        'items': items,
+    }
+    return render(request, 'accounts/user_favorites.html', context)

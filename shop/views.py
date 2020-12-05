@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
-from shop.models import Item
+from shop.models import Item, Favorite
 
 
 def index(request):
@@ -18,6 +19,7 @@ def list_items(request):
     }
     return render(request, 'shop/items_list.html', context)
 
+
 def list_earrings(request):
     earrings = [i for i in Item.objects.all() if i.type == 'ER']
     context = {
@@ -26,6 +28,7 @@ def list_earrings(request):
     }
     return render(request, 'shop/items_list.html', context)
 
+
 def list_rings(request):
     rings = [i for i in Item.objects.all() if i.type == 'RI']
     context = {
@@ -33,6 +36,7 @@ def list_rings(request):
         'label': 'Rings',
     }
     return render(request, 'shop/items_list.html', context)
+
 
 def list_necklaces(request):
     necklaces = [i for i in Item.objects.all() if i.type == 'NL']
@@ -47,5 +51,19 @@ def item_details(request, pk):
     item = Item.objects.get(pk=pk)
     context = {
         'item': item,
+        'is_in_user_fav': item.favorite_set.filter(user_id=request.user.profile.id).exists(),
     }
     return render(request, 'shop/items_details.html', context)
+
+
+@login_required
+def add_item_to_favorites(request, pk):
+    fav = Favorite.objects.filter(user_id=request.user.profile.id, item_id=pk).first()
+    if fav:
+        fav.delete()
+    else:
+        item = Item.objects.get(pk=pk)
+        fav = Favorite(test=str(pk), user=request.user.profile)
+        fav.item = item
+        fav.save()
+    return redirect('item details', pk=pk)

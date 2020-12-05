@@ -7,6 +7,13 @@
 {% block site_content %}
 
     <h1 class='text-center'>{{ label }}</h1>
+    {% if label == 'All products' %}
+
+        <a class="btn btn-outline-dark" href="{% url 'list earrings' %}" role="button">Earrings</a>
+        <a class="btn btn-outline-dark" href="{% url 'list rings' %}" role="button">Rings</a>
+        <a class="btn btn-outline-dark" href="{% url 'list necklaces' %}" role="button">Necklaces</a>
+
+    {% endif %}
     {% if items %}
         <div class="row item-box">
             {% for item in items %}
@@ -17,9 +24,11 @@
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.price }}$</p>
                             <a href="{% url 'item details' item.id %}" class="btn btn-primary">See details</a>
+                            <a href="#" class="btn btn-warning">Add to card</a>
                         </div>
                     </div>
                 </div>
+
             {% endfor %}
         </div>
     {% else %}

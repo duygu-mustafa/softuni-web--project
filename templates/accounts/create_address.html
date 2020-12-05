@@ -1,0 +1,11 @@
+{% extends 'accounts/user_base.html' %}
+
+{% block user_content %}
+
+    <form method="post" action="{% url 'create address' %}">
+        {{ form }}
+        {% csrf_token %}
+        <button class="btn btn-success item-box">Create</button>
+    </form>
+
+{% endblock %}
