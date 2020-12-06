@@ -1,5 +1,9 @@
 {% extends 'accounts/user_base.html' %}
 
+{% block site_title %}
+    Create Address
+{% endblock %}
+
 {% block user_content %}
 
     <form method="post" action="{% url 'create address' %}">

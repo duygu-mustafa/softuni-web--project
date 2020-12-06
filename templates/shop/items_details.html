@@ -12,11 +12,12 @@
             <div class="d-flex flex-column">
                 <h5 class="text-left">Name: {{ item.name }}</h5>
                 <h5 class="text-left">Type: {{ item.get_type_display }}</h5>
-                <h5 class="text-left">Price: {{ item.price }}$</h5>
+                <h5 class="text-left">Price: €{{ item.price }}</h5>
             </div>
             <p class="mt-2 text-left">Description: {{ item.description }}</p>
 
             <div class="text-left">
+            {% if user.is_authenticated %}
                 {% if is_in_user_fav %}
 {#                    <i class="fa fa-heart" aria-hidden="true"></i>#}
                     <a href="{% url 'add to fav' item.id %}">Remove from favorites</a>
@@ -24,11 +25,16 @@
 {#                    <i class="fa fa-heart-o" aria-hidden="true"></i>#}
                     <a href="{% url 'add to fav' item.id %}">Add to Favorites</a>
                 {% endif %}
+            {% endif %}
             </div>
 
             <div class="text-left item-box">
                 {% if item.is_available %}
-                    <a href="#" class="btn btn-warning">Add to card</a>
+                    <form action="{% url 'cart add' item.id %}" method="post">
+                        {{ cart_product_form }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-warning">Add to cart</button>
+                    </form>
                 {% else %}
                     <a class="btn btn-secondary" disabled>Out of stock</a>
                 {% endif %}

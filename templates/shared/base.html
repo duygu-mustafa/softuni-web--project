@@ -14,10 +14,14 @@
 <body>
 {% include 'shared/partials/header.html' with current_page=current_page %}
 
+{% block index_photo %}
+{% endblock %}
+
 <div class="container text-center">
     {% block site_content %}
     {% endblock %}
 </div>
+
 {% include 'shared/partials/footer.html' with current_page=current_page %}
 </body>
 </html>

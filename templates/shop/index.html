@@ -5,18 +5,26 @@
     Home
 {% endblock %}
 
-{% block site_styles %}
-
+{% block index_photo %}
+    <img src="{% static '/images/index_photo.jpg' %}"
+                class="img-fluid">
 {% endblock %}
 
 {% block site_content %}
     <div class="d-flex flex-column item-box">
-        <div class="p-2"><img
-                src="{% static '/images/index.jpeg' %}"
-                class="img-fluid">
+        <div class="p-2">
+            <h5>
+                Who we are
+            </h5>
+            <p>Each piece made is carefully considered and is either limited edition or one-of-a-kind. Joanna believes
+                that the person wearing her jewellery deserves to feel special & the knowledge that each piece is either
+                unique or limited edition contributes hugely to that ethos. </p>
+            <a href="{% url 'about' %}">Read more about us</a>
         </div>
 
-        <div class="p-2"><a class="btn btn-dark" href="{% url 'list items' %}" role="button"><h3>Shop now</h3></a></div>
+        <div class="p-2">
+            <a class="btn btn-dark" href="{% url 'list items' %}" role="button"><h3>Shop now</h3></a>
+        </div>
 
         <div class="p-2">
             <div class="d-flex justify-content-center">

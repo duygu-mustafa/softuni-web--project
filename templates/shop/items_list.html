@@ -2,7 +2,7 @@
 
 
 {% block site_title %}
-    Products
+    {{label}}
 {% endblock %}
 {% block site_content %}
 
@@ -22,9 +22,13 @@
                         <img src="{{ item.image.url }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.name }}</h5>
-                            <p class="card-text">{{ item.price }}$</p>
+                            <p class="card-text">€{{ item.price }}</p>
                             <a href="{% url 'item details' item.id %}" class="btn btn-primary">See details</a>
-                            <a href="#" class="btn btn-warning">Add to card</a>
+                            {% if item.is_available %}
+
+                            {% else %}
+                                <a class="btn btn-secondary" disabled>Out of stock</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

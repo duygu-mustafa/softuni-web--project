@@ -84,7 +84,6 @@ def delete_profile(request):
 @login_required
 def user_addresses(request):
     user = request.user
-    addresses = user.profile.address_set.all
     context = {
         'addresses': user.profile.address_set.all,
     }

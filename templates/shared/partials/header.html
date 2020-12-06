@@ -1,5 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Logo</a>
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dbece9;">
+    <a class="navbar-brand" href="/">
+        <div class="p-2"><img
+                src="{% static '/images/logo.png' %}"
+                style="width: 70px;">
+        </div>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,9 +25,14 @@
             </li>
 
         </ul>
+        <span class="navbar-text">
+            <a class="nav-item" href="{% url 'cart detail' %}">
+                <img src="{% static 'images/cart.png' %}" style="width: 20px; margin-right: 10px;" alt="cart">
+            </a>
+        </span>
         {% if user.is_authenticated %}
             <span class="navbar-text">
-                <a class="nav-item" href="{% url 'user profile' %}">{{user.first_name}}</a>
+                <a class="nav-item" href="{% url 'user profile' %}">{{ user.first_name }}</a>
                 <a class="nav-item" href="{% url 'signout user' %}">Sign Out</a>
             </span>
         {% else %}

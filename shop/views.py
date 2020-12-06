@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from cart.forms import CartAddProductForm
 from shop.models import Item, Favorite
 
 
@@ -49,9 +50,15 @@ def list_necklaces(request):
 
 def item_details(request, pk):
     item = Item.objects.get(pk=pk)
+    cart_product_form = CartAddProductForm()
+    if request.user.is_authenticated:
+        fav_bool = item.favorite_set.filter(user_id=request.user.profile.id).exists()
+    else:
+        fav_bool = False
     context = {
         'item': item,
-        'is_in_user_fav': item.favorite_set.filter(user_id=request.user.profile.id).exists(),
+        'is_in_user_fav': fav_bool,
+        'cart_product_form': cart_product_form,
     }
     return render(request, 'shop/items_details.html', context)
 
