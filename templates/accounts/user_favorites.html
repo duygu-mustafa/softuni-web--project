@@ -19,11 +19,14 @@
                         <h5 class="card-title">{{ item.name }}</h5>
                         <p class="card-text">{{ item.price }}$</p>
                         <a href="{% url 'item details' item.id %}" class="btn btn-primary">See details</a>
-                        <a href="#" class="btn btn-warning">Add to card</a>
                     </div>
                 </div>
 
             {% endfor %}
+
+        </div>
+        <div>
+            <a href="{% url "list items" %}" class="btn btn-primary">Continue shopping</a>
         </div>
     {% else %}
         <p>No products in favorites</p>

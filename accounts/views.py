@@ -125,7 +125,7 @@ def edit_address(request, pk):
         form = AddressForm(request.POST, instance=address)
         if form.is_valid():
             address = form.save()
-            address.profile = request.user.profile.id
+            address.profile = request.user.profile
             address.save()
             return redirect('user addresses')
         context = {
@@ -153,7 +153,7 @@ def delete_address(request, pk):
         address.delete()
         return redirect('user addresses')
 
-
+@login_required
 def user_favorites(request):
     favorites = request.user.profile.favorite_set.filter(user_id=request.user.profile.id)
     items = [Item.objects.get(pk=f.item_id) for f in favorites]

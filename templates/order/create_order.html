@@ -1,0 +1,41 @@
+{% extends "shared/base.html" %}
+{% block site_title %}
+    Checkout
+{% endblock %}
+
+{% block site_content %}
+    <h1>Checkout</h1>
+    <div class="d-flex flex-row bd-highlight mb-3">
+
+        <div class="p-2 bd-highlight" style="width: 500px;">
+
+            <h3>Your order</h3>
+            <ul>
+                {% for item in cart %}
+                    <h6>
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>${{ item.total_price }}</span>
+                    </h6>
+                {% endfor %}
+            </ul>
+            <p>Total: <b>${{ cart.get_total_price }}</b></p>
+
+        </div>
+        <div class="p-2 bd-highlight">
+            <h5 class="text-left">First name: {{ user.first_name }}</h5>
+            <h5 class="text-left">Last name: {{ user.last_name }}</h5>
+            <h5 class="text-left">Email: {{ user.email }}</h5>
+            <h5 class="text-left">Phone: {{ user.profile.phone }}</h5>
+
+            <form action="{% url 'create order' %}" method="post" class="order-form">
+                {{ form.as_p }}
+                <p><input type="submit" value="Place order"></p>
+                {% csrf_token %}
+            </form>
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

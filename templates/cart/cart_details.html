@@ -34,7 +34,8 @@
                             {% csrf_token %}
                         </form>
                     </td>
-                    <td><a href="{% url "cart remove" product.id %}" class="btn btn-outline-primary btn-sm">Remove</a></td>
+                    <td><a href="{% url "cart remove" product.id %}" class="btn btn-outline-primary btn-sm">Remove</a>
+                    </td>
                     <td class="num">€{{ item.price }}</td>
                     <td class="num">€{{ item.total_price }}</td>
                 </tr>
@@ -50,6 +51,8 @@
     </table>
     <p class="text-right">
         <a href="{% url "list items" %}" class="btn btn-primary">Continue shopping</a>
-        <a href="#" class="btn btn-warning">Checkout</a>
+
+        <a href="{% url 'create order' %}" class="btn btn-warning">Checkout</a>
+
     </p>
 {% endblock %}
