@@ -14,7 +14,7 @@ class Order(models.Model):
     ]
 
     profile = models.ForeignKey(Profile, on_delete=CASCADE)
-    address = models.ForeignKey(Address, on_delete=DO_NOTHING)
+    address = models.ForeignKey(Address, on_delete=CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=2,

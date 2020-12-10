@@ -3,11 +3,13 @@ from django.shortcuts import render
 
 from accounts.models import Address
 from cart.cart import Cart
+from order.decorators import cart_items_required
 from order.forms import OrderCreateForm
 from order.models import OrderItem
 
 
 @login_required
+@cart_items_required
 def create_order(request):
     cart = Cart(request)
     profile = request.user.profile

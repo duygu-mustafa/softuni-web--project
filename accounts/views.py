@@ -103,6 +103,7 @@ def create_address(request):
         if form.is_valid():
             address = form.save(commit=False)
             address.profile_id = request.user.profile.id
+            address.is_default = False
             address.save()
             return redirect('user addresses')
         context = {
@@ -124,8 +125,9 @@ def edit_address(request, pk):
     else:
         form = AddressForm(request.POST, instance=address)
         if form.is_valid():
-            address = form.save()
+            address = form.save(commit=False)
             address.profile = request.user.profile
+            address.is_default = False
             address.save()
             return redirect('user addresses')
         context = {

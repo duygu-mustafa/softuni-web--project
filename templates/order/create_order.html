@@ -27,11 +27,17 @@
             <h5 class="text-left">Email: {{ user.email }}</h5>
             <h5 class="text-left">Phone: {{ user.profile.phone }}</h5>
 
+            <a href="{% url 'create address' %}"> Or add another address</a>
             <form action="{% url 'create order' %}" method="post" class="order-form">
                 {{ form.as_p }}
-                <p><input type="submit" value="Place order"></p>
+
+                <p>
+                    <button type="submit" class="btn btn-warning">Place order</button>
+                </p>
                 {% csrf_token %}
             </form>
+
+
         </div>
 
 

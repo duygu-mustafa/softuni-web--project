@@ -62,5 +62,5 @@ class AddressForm(forms.ModelForm):
 
     class Meta:
         model = Address
-        exclude = ('profile',)
+        exclude = ('profile', 'is_default',)
 
