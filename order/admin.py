@@ -4,9 +4,8 @@ from django.contrib import admin
 from order.models import Order, OrderItem
 
 
-
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('profile', 'address', 'status')
+    list_display = ('id', 'profile', 'address', 'status')
     list_filter = ('status', 'profile')
 
 

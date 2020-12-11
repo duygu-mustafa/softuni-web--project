@@ -5,13 +5,27 @@
 {% endblock %}
 
 {% block site_content %}
-    <div class="container">
-        <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
-              action="{% url 'login' %}">
-            <h2>Login</h2>
-            {{ form }}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+
+    <div class="container-fluid" style="background-image: none">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
+                      action="{% url 'login' %}">
+                    <h2>Sign In</h2>
+                    <div class="label-box">{{ form.username.label }}
+                    {{ form.username }} </div>
+                    <div class="label-box">{{ form.password.label }}
+                    {{ form.password }} </div>
+                    {% csrf_token %}
+                    <br>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <br>
+                    <span>Don't have an account?<br><a href="{% url 'signup user' %}" style="color:orange">Sign up here</a></span>
+                </form>
+                </form>
+            </div>
+
+        </div>
     </div>
 {% endblock %}

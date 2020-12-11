@@ -53,6 +53,19 @@ class ProfileForm(forms.ModelForm):
         fields = ('first_name', 'last_name')
 
 
+class PhoneForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for (_, field) in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+    class Meta:
+        model = Profile
+        fields = ('phone',)
+
+
+
 class AddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

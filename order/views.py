@@ -7,9 +7,8 @@ from order.decorators import cart_items_required
 from order.forms import OrderCreateForm
 from order.models import OrderItem
 
-
-@login_required
 @cart_items_required
+@login_required
 def create_order(request):
     cart = Cart(request)
     profile = request.user.profile
@@ -33,10 +32,8 @@ def create_order(request):
                                          price=item['price'],
                                          quantity=item['quantity'])
                 cart.clear()
-                context = {
-                    'order': order,
-                }
-                return render(request, 'order/created_thank_you.html', context)
+
+                return render(request, 'order/created_thank_you.html')
         else:
             context = {
                 'form': form,

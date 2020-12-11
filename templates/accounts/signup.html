@@ -11,13 +11,40 @@
             <div class="col-lg-6">
                 <form style="border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
                     <h2>Sign up</h2>
-                    {{ form }}
+                    <div class="label-box">
+                        {{ form.username.label }}
+                        {{ form.username }}
+                    </div>
+
+                    <div class="label-box">
+                        {{ form.first_name.label }}
+                        {{ form.first_name }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.last_name.label }}
+                        {{ form.last_name }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.email.label }}
+                        {{ form.email }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.password.label }}
+                        {{ form.password }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.phone.label }}
+                        {{ form.phone }}
+                    </div>
+
+
                     {% csrf_token %}
-                    <button class="btn btn-primary" type="submit">Sign up</button>
+                    <button class="btn btn-primary text-center" type="submit">Sign up</button>
+                    <br>
                     <span>Have an account?<a href="" style="color:orange">Sign in here</a></span>
                 </form>
             </div>
-            <div class="col-lg-3"></div>
+
         </div>
     </div>
 {% endblock %}

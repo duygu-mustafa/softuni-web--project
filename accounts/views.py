@@ -2,7 +2,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from accounts.forms import RegisterForm, ProfileForm, AddressForm
+from accounts.forms import RegisterForm, ProfileForm, AddressForm, PhoneForm
 from accounts.models import Profile, Address
 from shop.models import Item
 
@@ -70,6 +70,29 @@ def edit_profile(request):
             }
             return render(request, 'accounts/edit_profile.html', context)
 
+
+@login_required
+def edit_phone(request):
+    user = request.user
+    if request.method == 'GET':
+        context = {
+            'form': PhoneForm(instance=user.profile),
+        }
+
+        return render(request, 'accounts/edit_phone.html', context)
+    else:
+        form = PhoneForm(request.POST, instance=user.profile)
+        if form.is_valid():
+            phone = form.save(commit=False)
+            phone.user = user
+            phone.id = user.profile.id
+            phone.save()
+            return redirect('user profile')
+        else:
+            context = {
+                'form': form,
+            }
+            return render(request, 'accounts/edit_phone.html', context)
 
 @login_required
 def delete_profile(request):
