@@ -18,6 +18,7 @@ class RegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -65,7 +66,6 @@ class PhoneForm(forms.ModelForm):
         fields = ('phone',)
 
 
-
 class AddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -76,4 +76,3 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = ('profile', 'is_default',)
-

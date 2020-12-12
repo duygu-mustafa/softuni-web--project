@@ -24,7 +24,7 @@ class Item(models.Model):
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return f'{self.type}: {self.name}'
+        return f'{self.id}# {self.type}: {self.name}'
 
 
 class Favorite(models.Model):

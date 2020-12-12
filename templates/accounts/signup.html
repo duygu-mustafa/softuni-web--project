@@ -33,8 +33,33 @@
                         {{ form.password }}
                     </div>
                     <div class="label-box">
+                        {{ form.password2.label }}
+                        {{ form.password1 }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.password2.label }}
+                        {{ form.password2 }}
+                    </div>
+                    <div class="label-box">
                         {{ form.phone.label }}
                         {{ form.phone }}
+                    </div>
+                    <div class="label-box">
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
                     </div>
 
 

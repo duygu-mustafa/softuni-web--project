@@ -9,5 +9,10 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ('status', 'profile')
 
 
+class OrderItemAdmin(admin.ModelAdmin):
+    list_display = ('id', 'order_id', 'product_id', 'quantity', 'price')
+    list_filter = ('order_id',)
+
+
 admin.site.register(Order, OrderAdmin)
-admin.site.register(OrderItem)
+admin.site.register(OrderItem, OrderItemAdmin)

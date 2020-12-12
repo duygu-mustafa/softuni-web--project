@@ -13,15 +13,38 @@
                 <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
                       action="{% url 'login' %}">
                     <h2>Sign In</h2>
-                    <div class="label-box">{{ form.username.label }}
-                    {{ form.username }} </div>
-                    <div class="label-box">{{ form.password.label }}
-                    {{ form.password }} </div>
+                    <div class="label-box">
+                        {{ form.username.label }}
+                        {{ form.username }}
+                    </div>
+                    <div class="label-box">
+                        {{ form.password.label }}
+                        {{ form.password }}
+                    </div>
+                    <div class="label-box">
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger">
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
                     {% csrf_token %}
+
                     <br>
                     <button type="submit" class="btn btn-primary">Sign In</button>
                     <br>
-                    <span>Don't have an account?<br><a href="{% url 'signup user' %}" style="color:orange">Sign up here</a></span>
+                    <span>Don't have an account?<br><a href="{% url 'signup user' %}"
+                                                       style="color:orange">Sign up here</a></span>
                 </form>
                 </form>
             </div>

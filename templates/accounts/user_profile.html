@@ -6,16 +6,18 @@
 
 {% block user_content %}
     <div class="d-flex flex-column">
+        <h5 class="text-left">Username: {{ user.username }}</h5>
         <h5 class="text-left">First name: {{ user.first_name }}</h5>
         <h5 class="text-left">Last name: {{ user.last_name }}</h5>
         <h5 class="text-left">Email: {{ user.email }}</h5>
-        <h5 class="text-left">Phone: {{ user.profile.phone }} <a href="{% url 'edit phone' %}">Edit phone number</a></h5>
+        <h5 class="text-left">Phone: {{ user.profile.phone }} <a href="{% url 'edit phone' %}">Edit phone number</a>
+        </h5>
     </div>
     <div>
 
         <a href="{% url 'edit profile' %}" class="btn btn-success">Edit</a>
         <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a> <br>
-        <a class="btn btn-primary label-box" href="{% url 'signout user' %}">Sign Out</a>
+        <a class="btn btn-primary label-box btn-lg" href="{% url 'signout user' %}">Sign Out</a>
 
     </div>
 {% endblock %}
