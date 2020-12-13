@@ -6,22 +6,27 @@ from django.contrib.auth.models import User
 from accounts.models import Profile, Address
 
 
-class RegisterForm(UserCreationForm):
+class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        for (_, field) in self.fields.items():
+        for (name, field) in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            self.fields[name].help_text = None
 
-    phone = forms.IntegerField(required=True)
+    phone = forms.CharField(required=True, max_length=10, min_length=10)
 
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        exclude = ('username.help_text',)
 
         widgets = {
             'password': forms.PasswordInput(),
         }
+
+    # def clean_username(self):
+    #     username = self.cleaned_data.get('username',)
 
     def clean_email(self):
         email = self.cleaned_data.get('email', False)

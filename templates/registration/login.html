@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 {% block site_title %}
     Sign In
@@ -7,10 +8,9 @@
 {% block site_content %}
 
     <div class="container-fluid" style="background-image: none">
-        <div class="row">
-            <div class="col-lg-3"></div>
+        <div class="row" style="justify-content: center; width: 100%; margin: 3vh auto;">
             <div class="col-lg-6">
-                <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
+                <form class="m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%"
                       action="{% url 'login' %}">
                     <h2>Sign In</h2>
                     <div class="label-box">

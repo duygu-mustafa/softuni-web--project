@@ -14,12 +14,18 @@
     margin-top: 20px;
 }
 
-/*.body-main {*/
-/*    height: 100vh;*/
-/*}*/
+.body-main {
+    min-height: 60vh;
+}
 
 
 .label-box {
     margin: 10px;
 }
+
+footer {
+    position: relative;
+    bottom: 0;
+}
+
 
